@@ -1,7 +1,5 @@
 #include "ActiveClassParent.h"
 #include "rt.h"
-//#include <atomic> //C++11 library
-#include <mutex>
 using namespace std;
 
 int main(void)
