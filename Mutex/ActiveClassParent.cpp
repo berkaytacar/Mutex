@@ -18,11 +18,13 @@ int ActiveClassParent::main(void)
 {
 
 	//create the mutex m1
-	std::mutex m1;
+	//std::mutex m1;
 	// create the 3 other child threads
-	Child1 c1(1);
-	Child2 c2(2);
-	Child3 c3(3);
+	mutex* m1 = new mutex();
+
+	Child1 c1(1, m1);
+	Child2 c2(2, m1);
+	Child3 c3(3, m1);
 
 	// allow childs to run
 	c1.Resume();
@@ -30,12 +32,12 @@ int ActiveClassParent::main(void)
 	c3.Resume();
 
 	for (int i = 0; i < 50000; i++) {
-		//m1.lock(); // gain access to resource 
-		lock_guard<mutex> theLock(m1);
+		//lock_guard<mutex> theLock(m1);
+		m1->lock();
 		MOVE_CURSOR(5, 5);             	// move cursor to cords [x,y] = 5,5
 		printf("Thread 1");
 		fflush(stdout);		      	// force output to be written to screen now
-		//m1.unlock(); // let the resource go
+		m1->unlock();
 	}
 	
 	// wait for the 3 other child threads to end

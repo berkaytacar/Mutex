@@ -5,6 +5,8 @@
 using namespace std;
 
 // PARENT DECLARATION AND CHILD THREADS CAN BE FOUND BELOW
+////////////usdfhndfisdbfsiufbduf
+
 
 class ActiveClassParent : public ActiveClass
 {
@@ -31,23 +33,21 @@ public:
 class Child1 : public ActiveClass {
 private:
 	int num;
+	mutex* m1;
 	int main(void) {
 		//printf("Child 1 is running\n");
-		std:: mutex m1;
 		for (int i = 0; i < 50000; i++) {
-			//m1.lock(); // gain access to resource 
-			lock_guard<mutex> theLock(m1);
-
+			m1->lock();
 			MOVE_CURSOR(10, 20); // move cursor to cords [x,y] = (10, 20);
-			printf("Thread %d\n", num);
+			printf("Child %d\n", num);
 			fflush(stdout); // force output to be written to screen now
-			//m1.unlock(); // let the resource go
+			m1->unlock();
 		}
 		return 0;
 	}
 
 public:
-	Child1(int _num) { num = _num;}
+	Child1(int _num, mutex* _m) { num = _num; m1 = _m; }
 	
 };
 
@@ -56,22 +56,23 @@ public:
 class Child2 : public ActiveClass {
 private:
 	int num;
+	mutex* m1;
 	int main(void) {
-		std::mutex m1;
+		//std::mutex m1;
 		for (int i = 0; i < 50000; i++) {
-			//m1.lock(); // gain access to resource
-			lock_guard<mutex> theLock(m1);
+			m1->lock(); // gain access to resource
+			//lock_guard<mutex> theLock(m1);
 
 			MOVE_CURSOR(10, 30);             	// move cursor to cords [x,y] = (10, 30);
-			printf("Thread %d\n", num);
+			printf("Child %d\n", num);
 			fflush(stdout);		      	// force output to be written to screen now
-			//m1.unlock(); // let the resource go
+			m1->unlock(); // let the resource go
 		}
 		return 0;
 	}
 
 public:
-	Child2(int _num) { num = _num; }
+	Child2(int _num, mutex* _m) { num = _num; m1 = _m; }
 
 };
 
@@ -80,20 +81,21 @@ public:
 class Child3 : public ActiveClass {
 private:
 	int num;
+	mutex* m1;
 	int main(void) {
-		std::mutex m1;
+		//std::mutex m1;
 		for (int i = 0; i < 50000; i++) {
-			//m1.lock(); // access to resource
-			lock_guard<mutex> theLock(m1);
+			m1->lock(); // access to resource
+			//lock_guard<mutex> theLock(m1);
 			MOVE_CURSOR(10, 40);             	// move cursor to cords [x,y] = (10, 40);
-			printf("Thread %d\n", num);
+			printf("Child %d\n", num);
 			fflush(stdout);		      	// force output to be written to screen now
-			//m1.unlock(); // let the resource go
+			m1->unlock(); // let the resource go
 		}
 		return 0;
 	}
 
 public:
-	Child3(int _num) { num = _num; }
+	Child3(int _num, mutex* _m) { num = _num; m1 = _m; }
 
 };
