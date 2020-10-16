@@ -1,5 +1,6 @@
 #pragma once
 #include "rt.h"
+#include "Printer.h"
 //#include <atomic> //C++11 library
 #include <mutex>
 using namespace std;
@@ -33,21 +34,23 @@ public:
 class Child1 : public ActiveClass {
 private:
 	int num;
-	mutex* m1;
+	Printer p1;
+
 	int main(void) {
 		//printf("Child 1 is running\n");
 		for (int i = 0; i < 50000; i++) {
-			m1->lock();
-			MOVE_CURSOR(10, 20); // move cursor to cords [x,y] = (10, 20);
-			printf("Child %d\n", num);
-			fflush(stdout); // force output to be written to screen now
-			m1->unlock();
+			p1.printOnScreen(10, 20, 1);
+			//m1->lock();
+			//MOVE_CURSOR(10, 20); // move cursor to cords [x,y] = (10, 20);
+			//printf("Child %d\n", num);
+			//fflush(stdout); // force output to be written to screen now
+			//m1->unlock();
 		}
 		return 0;
 	}
 
 public:
-	Child1(int _num, mutex* _m) { num = _num; m1 = _m; }
+	Child1(int _num) { num = _num;}
 	
 };
 
@@ -56,23 +59,24 @@ public:
 class Child2 : public ActiveClass {
 private:
 	int num;
-	mutex* m1;
+	Printer p1;
 	int main(void) {
 		//std::mutex m1;
 		for (int i = 0; i < 50000; i++) {
-			m1->lock(); // gain access to resource
-			//lock_guard<mutex> theLock(m1);
+			p1.printOnScreen(10, 30, 2);
+			//m1->lock(); // gain access to resource
+			////lock_guard<mutex> theLock(m1);
 
-			MOVE_CURSOR(10, 30);             	// move cursor to cords [x,y] = (10, 30);
-			printf("Child %d\n", num);
-			fflush(stdout);		      	// force output to be written to screen now
-			m1->unlock(); // let the resource go
+			//MOVE_CURSOR(10, 30);             	// move cursor to cords [x,y] = (10, 30);
+			//printf("Child %d\n", num);
+			//fflush(stdout);		      	// force output to be written to screen now
+			//m1->unlock(); // let the resource go
 		}
 		return 0;
 	}
 
 public:
-	Child2(int _num, mutex* _m) { num = _num; m1 = _m; }
+	Child2(int _num) { num = _num; }
 
 };
 
@@ -81,21 +85,23 @@ public:
 class Child3 : public ActiveClass {
 private:
 	int num;
-	mutex* m1;
+	Printer p1;
 	int main(void) {
 		//std::mutex m1;
 		for (int i = 0; i < 50000; i++) {
-			m1->lock(); // access to resource
-			//lock_guard<mutex> theLock(m1);
-			MOVE_CURSOR(10, 40);             	// move cursor to cords [x,y] = (10, 40);
-			printf("Child %d\n", num);
-			fflush(stdout);		      	// force output to be written to screen now
-			m1->unlock(); // let the resource go
+			p1.printOnScreen(10, 40, 3);
+
+			//m1->lock(); // access to resource
+			////lock_guard<mutex> theLock(m1);
+			//MOVE_CURSOR(10, 40);             	// move cursor to cords [x,y] = (10, 40);
+			//printf("Child %d\n", num);
+			//fflush(stdout);		      	// force output to be written to screen now
+			//m1->unlock(); // let the resource go
 		}
 		return 0;
 	}
 
 public:
-	Child3(int _num, mutex* _m) { num = _num; m1 = _m; }
+	Child3(int _num) { num = _num; }
 
 };
