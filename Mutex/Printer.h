@@ -7,18 +7,18 @@
 
 class Printer {
 private:
-	mutex* m1;
+	CMutex* m1;
 public:
 	void printOnScreen(int x, int y, int thread) {
-		m1->lock();
+		m1->Wait();
 		MOVE_CURSOR(x, y);             	// move cursor to cords [x,y] = 5,5
 		printf("Thread %d", thread);
 		fflush(stdout);		      	// force output to be written to screen now
-		m1->unlock();
+		m1->Signal();
 	}
 
-	Printer() {
-		m1 = new mutex();
+	Printer(string Name) {
+		m1 = new CMutex(string("__Mutex__") + string(Name));
 	}
 
 };

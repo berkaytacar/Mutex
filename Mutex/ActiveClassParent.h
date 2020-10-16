@@ -34,9 +34,8 @@ public:
 class Child1 : public ActiveClass {
 private:
 	int num;
-	Printer p1;
-
 	int main(void) {
+		Printer p1("Fred");
 		//printf("Child 1 is running\n");
 		for (int i = 0; i < 50000; i++) {
 			p1.printOnScreen(10, 20, 1);
@@ -59,9 +58,9 @@ public:
 class Child2 : public ActiveClass {
 private:
 	int num;
-	Printer p1;
 	int main(void) {
 		//std::mutex m1;
+		Printer p1("Fred");
 		for (int i = 0; i < 50000; i++) {
 			p1.printOnScreen(10, 30, 2);
 			//m1->lock(); // gain access to resource
@@ -85,9 +84,9 @@ public:
 class Child3 : public ActiveClass {
 private:
 	int num;
-	Printer p1;
 	int main(void) {
 		//std::mutex m1;
+		Printer p1("Fred");
 		for (int i = 0; i < 50000; i++) {
 			p1.printOnScreen(10, 40, 3);
 

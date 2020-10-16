@@ -22,7 +22,7 @@ int ActiveClassParent::main(void)
 	//std::mutex m1;
 	// create the 3 other child threads
 
-	Printer p1;
+	Printer p1("Fred");
 
 	Child1 c1(1);
 	Child2 c2(2);
