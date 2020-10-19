@@ -4,7 +4,8 @@
 #include <mutex>
 #include "rt.h"
 
-
+// Solution with Monitor
+//ActiveClasses can't modify the mutex through lock/unlock 
 class Printer {
 private:
 	CMutex* m1;

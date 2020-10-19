@@ -4,6 +4,8 @@
 #include <mutex>
 using namespace std;
 
+// Solution with Monitor
+//ActiveClasses can't modify the mutex through lock/unlock 
 int main(void)
 {
 	// create instance of the above active object on the stack
