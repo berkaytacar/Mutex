@@ -4,9 +4,9 @@
 #include <mutex>
 using namespace std;
 
-// PARENT DECLARATION AND CHILD THREADS CAN BE FOUND BELOW
-////////////usdfhndfisdbfsiufbduf
+// Mutual Exclusion with Active Classes
 
+// PARENT DECLARATION AND CHILD THREADS CAN BE FOUND BELOW
 
 class ActiveClassParent : public ActiveClass
 {

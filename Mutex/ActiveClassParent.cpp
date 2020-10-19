@@ -3,6 +3,8 @@
 //#include <atomic> //C++11 library
 #include <mutex>
 using namespace std;
+// Mutual Exclusion with Active Classes
+
 //
 //	To create an active class with its own thread running through it. Derive a new class
 //	from the base class 'ActiveClass' and then you MUST override the inherited base class function int main(void)

@@ -4,6 +4,8 @@
 #include <mutex>
 using namespace std;
 
+// Mutual Exclusion with Active Classes
+
 int main(void)
 {
 	// create instance of the above active object on the stack
